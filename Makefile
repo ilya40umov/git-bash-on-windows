@@ -13,6 +13,7 @@ copy-from-system:
 	cp ~/.bashrc .
 	cp ~/.bash_aliases .
 	cp ~/.bash_profile .
+	cp ~/.bash_completion .
 	cp ~/.inputrc .
 	cp ~/.selected_editor .
 	cp ~/.vimrc .

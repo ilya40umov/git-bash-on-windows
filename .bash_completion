@@ -1,0 +1,7 @@
+# simple target autocomplete for make (if installed)
+if [ -x "$(command -v make)" ] ; then
+  _make_targets() {
+    COMPREPLY=( $(compgen -W "$(awk -F: '/^[a-zA-Z0-9][^$#\/\t=]*:([^=]|$)/ {print $1}' Makefile 2>/dev/null)" -- "${COMP_WORDS[1]}") )
+  }
+  complete -F _make_targets make
+fi

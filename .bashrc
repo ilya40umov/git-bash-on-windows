@@ -40,11 +40,18 @@ function __git_ps1 () {
 }
 export PROMPT_COMMAND=__git_ps1
 
+# define editor
+export VISUAL=vim
+export EDITOR="$VISUAL"
+
+# define pager
+export LESS='-R'
+export PAGER='less'
+export LESSHISTFILE=-
+
 # load bash aliases
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-# make sure vim used as editor
-export VISUAL=vim
-export EDITOR="$VISUAL"
+
