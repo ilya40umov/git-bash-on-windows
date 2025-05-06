@@ -35,8 +35,15 @@ function __git_ps1 () {
     if [ ! -z "$branch" ]; then
         branch="($branch)"
     fi
+
+    local venv=""
+    if [ ! -z "$VIRTUAL_ENV_PROMPT" ]; then
+        venv="$VIRTUAL_ENV_PROMPT"
+    else
+        venv=""
+    fi
  
-    export PS1="\[\e]0;\W\a\]\n\[\e[32m\]\u@\H \[\e[33m\]\w\[\e[0m\] \[\033[36m\]$branch\[\033[0m\]\n\$ "
+    export PS1="\[\e]0;\W\a\]\n\[\e[32m\]\u@\H \[\e[33m\]\w\[\e[0m\] \[\033[36m\]$branch\[\033[0m\] \[\033[31m\]$venv\[\033[0m\] \n\$ "
 }
 export PROMPT_COMMAND=__git_ps1
 
@@ -54,4 +61,7 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-
+# load bash completion
+if [ -f ~/.bash_completion ]; then
+    . ~/.bash_completion
+fi
