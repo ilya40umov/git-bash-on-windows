@@ -39,6 +39,8 @@ function __git_ps1 () {
     local venv=""
     if [ ! -z "$VIRTUAL_ENV_PROMPT" ]; then
         venv="$VIRTUAL_ENV_PROMPT"
+    elif [ ! -z "$VIRTUAL_ENV" ]; then
+        venv=$(basename ${VIRTUAL_ENV})
     else
         venv=""
     fi
