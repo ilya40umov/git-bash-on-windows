@@ -31,21 +31,31 @@ function __git_ps1 () {
             *) branch="${head:0:7}" ;;
         esac
     fi
- 
-    if [ ! -z "$branch" ]; then
-        branch="($branch)"
-    fi
 
     local venv=""
     if [ ! -z "$VIRTUAL_ENV_PROMPT" ]; then
-        venv="$VIRTUAL_ENV_PROMPT"
+        venv="${VIRTUAL_ENV_PROMPT%% }"
     elif [ ! -z "$VIRTUAL_ENV" ]; then
-        venv=$(basename ${VIRTUAL_ENV})
+        venv="$(basename ${VIRTUAL_ENV})"
     else
         venv=""
     fi
- 
-    export PS1="\[\e]0;\W\a\]\n\[\e[32m\]\u@\H \[\e[33m\]\w\[\e[0m\] \[\033[36m\]$branch\[\033[0m\] \[\033[31m\]$venv\[\033[0m\] \n\$ "
+
+    local path_bit="\[\e[33m\]\w\[\e[0m\] "
+
+    local branch_bit=""
+    if [ ! -z "$branch" ]; then
+        local branch_symbol=$'\u2387 '
+        branch_bit="\[\033[36m\]${branch_symbol}${branch}\[\033[0m\] "
+    fi
+
+    local venv_bit=""
+    if [ ! -z "$venv" ]; then
+      venv_bit="\[\033[31m\]$venv\[\033[0m\] "
+    fi
+   
+    #export PS1="\[\e]0;\W\a\]\n\[\e[32m\]\u@\H \[\e[33m\]\w\[\e[0m\] \[\033[36m\]$branch\[\033[0m\] \[\033[31m\]$venv\[\033[0m\] \n\$ "
+    export PS1="${path_bit}${branch_bit}${venv_bit}\$ "
 }
 export PROMPT_COMMAND=__git_ps1
 
