@@ -1,4 +1,4 @@
-SHELL := bash
+SHELL := bash.exe
 
 .PHONY: help
 
@@ -17,3 +17,15 @@ copy-from-system:
 	cp ~/.inputrc .
 	cp ~/.selected_editor .
 	cp ~/.vimrc .
+
+.PHONY: copy-to-system
+
+# Usage: make copy-to-system 
+copy-to-system:
+	cp .bashrc $$HOME/.bashrc
+	cp .bash_aliases $$HOME/.bash_aliases
+	cp .bash_profile $$HOME/.bash_profile
+	cp .bash_completion $$HOME/.bash_completion
+	cp .inputrc $$HOME/.inputrc
+	cp .selected_editor $$HOME/.selected_editor
+	cp .vimrc $$HOME/.vimrc
