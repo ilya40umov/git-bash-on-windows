@@ -1,32 +1,22 @@
+" -----------------------------------------------------------------
+" VimPlug
 "
-" sensible.vim
-"
+call plug#begin('~/.vim/plugged')
 
-set nocompatible
-set backspace=indent,eol,start
-set complete-=i
-set smarttab
-set nrformats-=octal
-set ttimeout
-set ttimeoutlen=100
-set incsearch
-set laststatus=2
-set ruler
-set wildmenu
-set scrolloff=1
-set sidescroll=1
-set sidescrolloff=2
-set display+=lastline
-set display+=truncate
-set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
-set autoread
-set history=1000
-set tabpagemax=50
-set sessionoptions-=options
-set viewoptions-=options
+Plug 'tpope/vim-sensible'
 
-"
-" End of sensible.vim
+Plug 'rakr/vim-one'
+
+Plug 'vim-airline/vim-airline'
+
+Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
+
+Plug 'ctrlpvim/ctrlp.vim'
+
+call plug#end()
+
+" -----------------------------------------------------------------
+" Vim settings
 "
 
 " Allows to re-use the same window and switch from an unsaved buffer without saving it first.
@@ -59,3 +49,25 @@ autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 " Deal with the screen blicking in VIM
 set belloff=all
+
+" -----------------------------------------------------------------
+"  Color scheme
+
+" Enable RGB colors
+set termguicolors
+" Use 'one' color scheme
+colorscheme one
+set background=dark
+autocmd! ColorScheme * hi VertSplit ctermbg=59
+
+" -----------------------------------------------------------------
+" NERDTree
+" https://github.com/preservim/nerdtree
+"
+
+" Quit vim if NERDTree is last open window
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" Shortcuts
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
